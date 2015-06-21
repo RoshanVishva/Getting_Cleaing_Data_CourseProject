@@ -65,20 +65,32 @@ suppressWarnings(require(data.table)) # require will load only package specified
 
 # Clipping all id files for test. the result will be a data table
 dt.test_ids<- as.data.table(cbind(df.test_act_ids,df.test_sub_ids))
-
+#removing orginal data sets
+rm(df.test_act_ids)
+rm(df.test_sub_ids)
 #Adding a variable called system with a value of 'test' , read README for further details
 dt.test_ids$system<-'Test'
 
 # Clipping  id files and relevent measures for test.the result will be a data table
 dt.test_full<- as.data.table(cbind(dt.test_ids,df.test_measure))
 
+#removing orginal data sets
+rm(dt.test_ids)
+rm(df.test_measure)
+
 # Clipping all id files for train. the result will be a data table
 dt.train_ids<- as.data.table(cbind(df.train_act_ids,df.train_sub_ids))
+#removing orginal data sets
+rm(df.train_act_ids)
+rm(df.train_sub_ids)
+
 #Adding a variable called system with a value of 'Train' , read README for further details
 dt.train_ids$system<-'Train'
 # Clipping all id files for train. the result will be a data table
 dt.train_full<- as.data.table(cbind( dt.train_ids, df.train_measure))
-
+#removing orginal data sets
+rm(dt.train_ids)
+rm(df.train_measure)
 # ques no 1 , merging test and train to create full data set
 
 dt.full_set<-rbind(dt.test_full,dt.train_full)
@@ -135,7 +147,7 @@ colnames(dt.avg.actsubj)[2] <- "Id of the subject who performed the activity"
 
 colnames(dt.avg.actsubj)[3:ncol(dt.avg.actsubj)]<-paste("Average ", names(dt.mean_std))
 
-dt.avg.actsubj
+print(dt.avg.actsubj)
 ##### end of question 5################# 
 
 }else { message('Data folder does not have required folders or files, Pls check README.MD ......')}
